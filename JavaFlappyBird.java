@@ -6,49 +6,47 @@ import javax.swing.*;
 
 class JavaFlappyBird extends JPanel implements Runnable, KeyListener
 {
+	private Flappy birb;
 	private boolean jumpKey;
-	
-	public Rectangle bird;
-	
-	public final int WIDTH = 800, HEIGHT = 800;
 	
 	public JavaFlappyBird()
 	{
-		setBackground(Color.WHITE);
-
+		setBackground(Color.BLACK);
+		
+		birb = new Flappy(310, 310, 100, 100, 100);
 		jumpKey = false;
 			
 		addKeyListener( this );
 		setFocusable( true );
 		new Thread(this).start();
-		
-		bird = new Rectangle( WIDTH / 2 - 10, HEIGHT / 2 - 10, 20, 20);
 	}
 
 	public void paint( Graphics window )
 	{
-		window.setColor(Color.WHITE); window.fillRect( 0,0, 720, 1280);
-		window.setColor(Color.BLACK); window.drawRect( 0,0, 720, 1280);
-		window.setColor(Color.YELLOW); window.fillRect(bird.x, bird.y, bird.width, bird.height);
+		window.setColor(Color.WHITE); window.fillRect( 0, 0, 720, 1280);
+		window.setColor(Color.BLACK); window.drawRect( 0, 0, 720, 1280);
 
 		window.setColor(Color.BLUE);		
 		
+		birb.paint(window);
+		
+		birb.fall();
+		
 		if(jumpKey)
 		{
-			bird.y += 3;
+			birb.jump();
+			jumpKey = false;
 		}					
 	}
 
 	public void keyPressed(KeyEvent e)
-	{  
-		if( e.getKeyCode()  == KeyEvent.VK_SPACE ) { jumpKey = true; }
-		
+	{   
+		if( e.getKeyCode()  == KeyEvent.VK_SPACE ) { jumpKey = true; }					
 	}
 
 	public void keyTyped(KeyEvent e)
 	{
 		keyPressed( e );			
-		bird.y -= 85;
 	}		
 	public void keyReleased(KeyEvent e)
 	{
