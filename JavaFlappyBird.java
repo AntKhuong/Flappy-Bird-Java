@@ -25,8 +25,10 @@ class JavaFlappyBird extends JPanel implements Runnable, KeyListener
 	{
 		window.setColor(Color.WHITE); window.fillRect( 0, 0, 720, 1280);
 		window.setColor(Color.BLACK); window.drawRect( 0, 0, 720, 1280);
-
-		window.setColor(Color.BLUE);		
+		
+		window.setColor(Color.ORANGE); window.fillRect( 0, 0, 720, 1280);
+		window.setColor(Color.GREEN); window.fillRect(0, 0, 720, 1130);
+		window.setColor(Color.CYAN); window.fillRect(0, 0, 720, 1100);		
 		
 		birb.paint(window);
 		
